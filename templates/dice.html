@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Dice Game</title>
+</head>
+<body>
+  <h1>Dice Game</h1>
+
+  {% if error %}
+    <p style="color:red;"><strong>{{ error }}</strong></p>
+  {% endif %}
+
+  <p><strong>Turn:</strong> {{ game.turn }}</p>
+  <p><strong>Point:</strong> {{ game.point if game.point else "None yet" }}</p>
+  <p><strong>Last roll:</strong> {{ game.last_roll if game.last_roll else "N/A" }}</p>
+
+  <p><strong>Result:</strong> {{ game.result }}</p>
+
+  <hr>
+
+  {% if game.finished %}
+    <p><em>Game finished. Start a new game to play again.</em></p>
+  {% endif %}
+
+  <form method="post">
+    <label>Enter roll (2–12) or q/quit:</label>
+    <input name="roll" type="text" autofocus />
+    <button type="submit" name="action" value="roll">Submit Roll</button>
+    <button type="submit" name="action" value="new">New Game</button>
+  </form>
+</body>
+</html>
