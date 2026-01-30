@@ -17,8 +17,18 @@ This project is a simple dice game built with **Python** and **Flask**. The user
 
 ## Requirements / Installation
 - Python 3.x
-- Flask (already installed for this project)
+- Flask
 
 If needed:
 ```bash
 pip install flask
+```
+
+## How to run
+From the project root directory (the folder that contains `app.py`):
+
+```bash
+python app.py
+```
+Then open your browser to:
+- http://127.0.0.1:5000/
