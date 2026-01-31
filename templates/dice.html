@@ -5,28 +5,58 @@
   <title>Dice Game</title>
 </head>
 <body>
+  <!-- Page title / heading -->
   <h1>Dice Game</h1>
 
+  {# Error message section: only shows when Flask passes a non-empty error string #}
   {% if error %}
     <p style="color:red;"><strong>{{ error }}</strong></p>
   {% endif %}
 
+  <!-- Game state display section: shows current turn, point, and last roll -->
   <p><strong>Turn:</strong> {{ game.turn }}</p>
+
+  <!-- Point display:
+       - If game.point has a value, display it
+       - Otherwise display "None yet" -->
   <p><strong>Point:</strong> {{ game.point if game.point else "None yet" }}</p>
+
+  <!-- Last roll display:
+       - If game.last_roll has a value, display it
+       - Otherwise display "N/A" -->
   <p><strong>Last roll:</strong> {{ game.last_roll if game.last_roll else "N/A" }}</p>
 
+  <!-- Result message section: displays the latest game message (win/lose/point/continue) -->
   <p><strong>Result:</strong> {{ game.result }}</p>
 
+  <!-- Visual separation line -->
   <hr>
 
+  {# Game finished notice:
+     Shows a message when game.finished is True (win or lose) #}
   {% if game.finished %}
     <p><em>Game finished. Start a new game to play again.</em></p>
   {% endif %}
 
+  <!-- User input form section:
+       - Submits to the same route (no action= specified)
+       - Uses POST so Flask can read request.form values -->
   <form method="post">
+    <!-- Label for the roll input box -->
     <label>Enter roll (2–12) or q/quit:</label>
+
+    <!-- Text input:
+         - name="roll" must match request.form.get("roll", "") in app.py
+         - autofocus puts cursor in the box on page load -->
     <input name="roll" type="text" autofocus />
+
+    <!-- Submit Roll button:
+         - name/value pair becomes action="roll" in request.form -->
     <button type="submit" name="action" value="roll">Submit Roll</button>
+
+    <!-- New Game button:
+         - name/value pair becomes action="new" in request.form
+         - app.py uses this to reset the game -->
     <button type="submit" name="action" value="new">New Game</button>
   </form>
 </body>
